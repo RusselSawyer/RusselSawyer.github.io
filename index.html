@@ -111,6 +111,39 @@
         .sec-head h2 { font-family: var(--serif); font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 700; }
         .sec-head p { color: var(--muted); font-size: .95rem; margin-left: auto; max-width: 40ch; }
 
+        /* Gallery */
+        .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+        .filters button { font-family: var(--mono); font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; background: none; color: var(--muted); border: 1px solid var(--line); padding: 8px 16px; cursor: pointer; transition: .15s; }
+        .filters button:hover { color: var(--ink); border-color: var(--muted); }
+        .filters button.on { background: var(--ink); color: #111; border-color: var(--ink); }
+        .gallery { column-count: 3; column-gap: 16px; }
+        .shot { position: relative; display: block; width: 100%; margin: 0 0 16px; break-inside: avoid; border: 0; padding: 0; cursor: zoom-in; overflow: hidden; background: var(--panel2); aspect-ratio: var(--ar); text-align: left; color: inherit; }
+        .shot .ph { position: absolute; inset: 0; background: var(--g); display: grid; place-items: center; }
+        .shot .ph svg { width: 34px; height: 34px; stroke: rgba(255,255,255,.55); fill: none; stroke-width: 1.5; }
+        .shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
+        .shot:hover img, .shot:hover .ph { transform: scale(1.06); }
+        .shot .ph { transition: transform .6s; }
+        .shot .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 16px 14px; background: linear-gradient(transparent, rgba(0,0,0,.78)); opacity: 0; transform: translateY(8px); transition: .3s; }
+        .shot:hover .cap, .shot:focus-visible .cap { opacity: 1; transform: none; }
+        .cap b { display: block; font-family: var(--serif); font-size: 1.05rem; }
+        .cap span { font-family: var(--mono); font-size: .7rem; color: var(--accent); letter-spacing: .08em; }
+        .shot.hide { display: none; }
+
+        /* Lightbox */
+        #lb { position: fixed; inset: 0; z-index: 90; background: rgba(4, 4, 5, .96); display: none; grid-template-rows: 1fr auto; padding: 20px; }
+        #lb.open { display: grid; animation: fade .25s ease; }
+        .lb-stage { position: relative; display: grid; place-items: center; min-height: 0; }
+        .lb-img { max-width: 100%; max-height: 100%; display: grid; place-items: center; }
+        .lb-img img { max-width: 100%; max-height: calc(100vh - 150px); object-fit: contain; display: block; }
+        .lb-img .ph { width: min(80vw, 760px); aspect-ratio: var(--ar); max-height: calc(100vh - 150px); background: var(--g); display: grid; place-items: center; }
+        .lb-img .ph svg { width: 48px; height: 48px; stroke: rgba(255,255,255,.6); fill: none; stroke-width: 1.4; }
+        .lb-btn { position: absolute; background: rgba(255,255,255,.08); border: 1px solid var(--line); color: var(--ink); width: 46px; height: 46px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; display: grid; place-items: center; }
+        .lb-btn:hover { background: var(--accent); color: #111; }
+        .lb-prev { left: 4px; } .lb-next { right: 4px; } .lb-close { top: 0; right: 0; }
+        .lb-info { text-align: center; padding-top: 14px; }
+        .lb-info h3 { font-family: var(--serif); font-size: 1.3rem; }
+        .lb-info p { font-family: var(--mono); font-size: .76rem; color: var(--accent); letter-spacing: .08em; margin-top: 4px; }
+
         /* About */
         .about-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
         .card { background: var(--panel); border: 1px solid var(--line); padding: 22px 24px; }
@@ -156,6 +189,7 @@
         .rv { opacity: 0; transform: translateY(26px); transition: opacity .8s, transform .8s; }
         .rv.in { opacity: 1; transform: none; }
 
+        @media (max-width: 900px) { .gallery { column-count: 2; } }
         @media (max-width: 820px) {
             .hero .wrap, .contact-wrap { grid-template-columns: 1fr; }
             .photo-side { order: -1; }
@@ -164,11 +198,12 @@
             .sec-head p { margin-left: 0; }
             .t2 { right: -8px; }
         }
+        @media (max-width: 520px) { .gallery { column-count: 1; } }
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
             .grain, .focus, .rec b, .cursor { animation: none; }
             .rv { opacity: 1; transform: none; transition: none; }
-            .btn, .cert, .frame, #boot, .blade { transition: none; }
+            .btn, .cert, .frame, .shot img, .shot .ph, #boot, .blade { transition: none; }
             body:not(.locked) .page { animation: none; }
         }
     </style>
@@ -202,6 +237,7 @@
             </a>
             <ul class="menu">
                 <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#achievements">Awards</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -233,13 +269,13 @@
                     </div>
 
                     <div class="actions">
-                        <a class="btn solid" href="cv.pdf" download>
+                        <a class="btn solid" href="#gallery">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                            View Gallery
+                        </a>
+                        <a class="btn line" href="cv.pdf" download>
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><polyline points="7 11 12 16 17 11"/><path d="M4 20h16"/></svg>
                             Download CV
-                        </a>
-                        <a class="btn line" href="#contact">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
-                            Contact Me
                         </a>
                     </div>
 
@@ -255,57 +291,52 @@
                             <img src="MYPHOTO.jpg" alt="Photo of Russel Heinrich Sawyer" onerror="this.onerror=null;this.src='profile.png';">
                         </div>
                         <figcaption></figcaption>
-                        <span class="tag t1" aria-hidden="true">HTML</span>
-                        <span class="tag t2" aria-hidden="true">CSS</span>
-                        <span class="tag t3" aria-hidden="true">JS</span>
+                        <span class="tag t1" aria-hidden="true">PORTRAIT</span>
+                        <span class="tag t2" aria-hidden="true">STREET</span>
+                        <span class="tag t3" aria-hidden="true">LANDSCAPE</span>
                     </figure>
                 </div>
             </div>
         </section>
 
+        <section class="block" id="gallery">
+            <div class="wrap">
+                <div class="sec-head rv">
+                    <span class="num">01</span>
+                    <h2>Selected Work</h2>
+                    <p>Click any frame to view it large. Use the arrow keys to browse.</p>
+                </div>
+                <div class="filters rv" id="filters" role="group" aria-label="Filter photos by category"></div>
+                <div class="gallery" id="grid"></div>
+            </div>
+        </section>
+
         <section class="block" id="about">
             <div class="wrap">
-                <div class="sec-head rv"><span class="num">01</span><h2>About me</h2></div>
+                <div class="sec-head rv"><span class="num">02</span><h2>About me</h2></div>
                 <div class="about-grid rv">
                     <div class="card wide">
                         <h3><span>01</span>Bio</h3>
-                        <p>Hi, I'm Russel Heinrich Sawyer. A 4th year student of Computer Engineering Department from Cagayan State University (Carig Campus). Approachable, cheerful, witty, the one call away friend, and a gamer. I love BTS and my bias is Kim Taehyung (V).</p>
+                        <p>Hi, I'm Russel Heinrich Sawyer. Approachable, cheerful, witty, the one call away friend.</p>
                     </div>
                     <div class="card">
                         <h3><span>02</span>Location</h3>
-                        <p>Callao Sur, Lasam, Cagayan</p>
+                        <p>Philippines</p>
                     </div>
                     <div class="card">
                         <h3><span>03</span>Hobbies</h3>
                         <ul class="chips">
-                            <li>Playing Online Games</li>
+                            <li>Photography</li>
                             <li>Bonding with Friends</li>
                             <li>Eating</li>
-                            <li>Solving Math Problems</li>
-                            <li>Watching K-drama</li>
-                            <li>Loves to play K-pop musics</li>
+                            <li>Exploring Places</li>
+                            <li>Watching Movies</li>
                         </ul>
-                    </div>
-                    <div class="card">
-                        <h3><span>04</span>Friends</h3>
-                        <ul class="plain">
-                            <li>Ingrid Fiona M. Paeste</li>
-                            <li>Mitz Zyrelle M. Victorio</li>
-                            <li>John Medric M. Gumabay</li>
-                            <li>Mariel Clarizze D. Domingo</li>
-                            <li>Alex Milo</li>
-                            <li>Vincent Maño</li>
-                            <li>Kweeny Gelotin</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h3><span>05</span>Lover</h3>
-                        <p>I love myself</p>
                     </div>
                 </div>
 
                 <div class="kit rv">
-                    <div class="kit-title">Skills</div>
+                    <div class="kit-title">Skills in my camera bag</div>
                     <div class="kit-body">
                         <ul class="kit-items">
                             <li>Problem Solving</li>
@@ -322,7 +353,7 @@
 
         <section class="block" id="achievements">
             <div class="wrap">
-                <div class="sec-head rv"><span class="num">02</span><h2>Achievements</h2></div>
+                <div class="sec-head rv"><span class="num">03</span><h2>Achievements</h2></div>
                 <div class="cert-grid rv">
 
                     <article class="cert">
@@ -375,9 +406,9 @@
 
         <section class="block" id="contact">
             <div class="wrap">
-                <div class="sec-head rv"><span class="num">03</span><h2>Contact</h2></div>
+                <div class="sec-head rv"><span class="num">04</span><h2>Contact</h2></div>
                 <div class="contact-wrap rv">
-                    <p>Have a question? Send me an email or call me and <em>I'll reply as soon as I can.</em></p>
+                    <p>Have a shoot in mind or a question? Send me an email or call me and <em>I'll reply as soon as I can.</em></p>
                     <ul class="contact-list">
                         <li>
                             <span class="contact-label">EMAIL</span>
@@ -393,15 +424,41 @@
         </section>
     </main>
 
-    <footer>© 2026 Russel Sawyer // built with HTML, CSS &amp; JS</footer>
+    <footer>© 2026 Russel Sawyer // shot &amp; built with HTML, CSS &amp; JS</footer>
+</div>
+
+<div id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <div class="lb-stage">
+        <button class="lb-btn lb-close" id="lbClose" aria-label="Close viewer">&times;</button>
+        <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous photo">&#8249;</button>
+        <div class="lb-img" id="lbImg"></div>
+        <button class="lb-btn lb-next" id="lbNext" aria-label="Next photo">&#8250;</button>
+    </div>
+    <div class="lb-info"><h3 id="lbTitle"></h3><p id="lbMeta"></p></div>
 </div>
 
 <script>
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    /* ===== ADD YOUR PHOTOS HERE =====
+       Put your image files in a "photos" folder and list them below.
+       ar = aspect ratio (width / height). Missing files show a colored placeholder. */
+    var PHOTOS = [
+        { src: "photos/photo1.jpg", title: "Golden Hour",      cat: "Landscape", meta: "f/8 · 1/250 · ISO 100", ar: 1.5,  g: "linear-gradient(135deg,#f6d365,#fda085)" },
+        { src: "photos/photo2.jpg", title: "Quiet Portrait",   cat: "Portrait",  meta: "f/1.8 · 1/400 · ISO 100", ar: 0.8,  g: "linear-gradient(135deg,#a18cd1,#fbc2eb)" },
+        { src: "photos/photo3.jpg", title: "City Rain",        cat: "Street",    meta: "f/2.8 · 1/125 · ISO 800", ar: 1.0,  g: "linear-gradient(135deg,#434343,#7a8a99)" },
+        { src: "photos/photo4.jpg", title: "Rice Terraces",    cat: "Landscape", meta: "f/11 · 1/200 · ISO 100", ar: 1.33, g: "linear-gradient(135deg,#56ab2f,#a8e063)" },
+        { src: "photos/photo5.jpg", title: "Friends Night",    cat: "Events",    meta: "f/2 · 1/60 · ISO 1600", ar: 0.75, g: "linear-gradient(135deg,#e5484d,#ff9a8b)" },
+        { src: "photos/photo6.jpg", title: "Market Morning",   cat: "Street",    meta: "f/4 · 1/320 · ISO 200", ar: 1.5,  g: "linear-gradient(135deg,#f7971e,#ffd200)" },
+        { src: "photos/photo7.jpg", title: "Window Light",     cat: "Portrait",  meta: "f/1.4 · 1/500 · ISO 100", ar: 1.0,  g: "linear-gradient(135deg,#2c3e50,#4ca1af)" },
+        { src: "photos/photo8.jpg", title: "Campus Walk",      cat: "Events",    meta: "f/5.6 · 1/250 · ISO 200", ar: 0.8,  g: "linear-gradient(135deg,#355c7d,#c06c84)" },
+        { src: "photos/photo9.jpg", title: "Blue Hour Coast",  cat: "Landscape", meta: "f/9 · 4s · ISO 100", ar: 1.78, g: "linear-gradient(135deg,#0f2027,#2c5364)" }
+    ];
+    var ICON = '<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3l2-3h8l2 3h3v11H3z"/><circle cx="12" cy="13" r="4"/></svg>';
+
     // Typing headline
     function startTyping() {
-        var roles = ["Handsome", "Friendly", "Problem Solver", "Cute", "Gamer"];
+        var roles = ["Photographer", "Storyteller", "Problem Solver", "Gamer", "Friend"];
         var el = document.getElementById("typed");
         if (reduce) { el.textContent = roles[0]; return; }
         var r = 0, i = 0, deleting = false;
@@ -419,7 +476,7 @@
     var boot = document.getElementById("boot"), fill = document.getElementById("fill"),
         pctEl = document.getElementById("pct"), stepEl = document.getElementById("step"),
         keyEl = document.getElementById("key"), focusEl = document.getElementById("focus");
-    var steps = ["metering light...", "setting aperture...", "focusing...", "loading profile...", "ready"];
+    var steps = ["metering light...", "setting aperture...", "focusing...", "loading gallery...", "ready to shoot"];
     var p = 0, ready = false, entered = false, timer;
 
     function setP(v) {
@@ -476,6 +533,67 @@
         }, { threshold: 0.12 });
         [].forEach.call(rvEls, function (el) { io.observe(el); });
     } else { [].forEach.call(rvEls, function (el) { el.classList.add("in"); }); }
+
+    // Gallery
+    var grid = document.getElementById("grid"), filtersEl = document.getElementById("filters");
+    var cats = ["All"];
+    PHOTOS.forEach(function (ph) { if (cats.indexOf(ph.cat) < 0) cats.push(ph.cat); });
+    cats.forEach(function (c, i) {
+        var b = document.createElement("button");
+        b.type = "button"; b.textContent = c; if (i === 0) b.className = "on";
+        b.setAttribute("aria-pressed", i === 0 ? "true" : "false");
+        b.addEventListener("click", function () {
+            [].forEach.call(filtersEl.children, function (x) { x.className = ""; x.setAttribute("aria-pressed", "false"); });
+            b.className = "on"; b.setAttribute("aria-pressed", "true");
+            [].forEach.call(grid.children, function (s) { s.classList.toggle("hide", c !== "All" && s.dataset.cat !== c); });
+        });
+        filtersEl.appendChild(b);
+    });
+    PHOTOS.forEach(function (ph, i) {
+        var s = document.createElement("button");
+        s.type = "button"; s.className = "shot rv in"; s.dataset.cat = ph.cat; s.dataset.i = i;
+        s.style.setProperty("--ar", ph.ar); s.style.setProperty("--g", ph.g);
+        s.setAttribute("aria-label", "Open photo: " + ph.title);
+        s.innerHTML = '<span class="ph">' + ICON + '</span><img src="' + ph.src + '" alt="' + ph.title + '" loading="lazy">' +
+            '<span class="cap"><b>' + ph.title + '</b><span>' + ph.cat.toUpperCase() + ' &middot; ' + ph.meta + '</span></span>';
+        s.querySelector("img").addEventListener("error", function () { this.style.display = "none"; });
+        s.addEventListener("click", function () { openLb(i); });
+        grid.appendChild(s);
+    });
+
+    // Lightbox
+    var lb = document.getElementById("lb"), lbImg = document.getElementById("lbImg"),
+        lbTitle = document.getElementById("lbTitle"), lbMeta = document.getElementById("lbMeta"), cur = 0, lastFocus = null;
+    function visibleIdx() {
+        var out = [];
+        [].forEach.call(grid.children, function (s) { if (!s.classList.contains("hide")) out.push(+s.dataset.i); });
+        return out;
+    }
+    function showLb(i) {
+        cur = i; var ph = PHOTOS[i];
+        lbImg.innerHTML = "";
+        var box = document.createElement("div");
+        box.className = "ph"; box.style.setProperty("--ar", ph.ar); box.style.setProperty("--g", ph.g); box.innerHTML = ICON;
+        var im = new Image(); im.alt = ph.title;
+        im.onload = function () { lbImg.innerHTML = ""; lbImg.appendChild(im); };
+        im.src = ph.src;
+        lbImg.appendChild(box);
+        lbTitle.textContent = ph.title;
+        lbMeta.textContent = ph.cat.toUpperCase() + "  ·  " + ph.meta;
+    }
+    function openLb(i) { lastFocus = document.activeElement; lb.classList.add("open"); document.body.style.overflow = "hidden"; showLb(i); document.getElementById("lbClose").focus(); }
+    function closeLb() { lb.classList.remove("open"); document.body.style.overflow = ""; if (lastFocus) lastFocus.focus(); }
+    function step(d) { var v = visibleIdx(), k = v.indexOf(cur); showLb(v[(k + d + v.length) % v.length]); }
+    document.getElementById("lbClose").addEventListener("click", closeLb);
+    document.getElementById("lbPrev").addEventListener("click", function () { step(-1); });
+    document.getElementById("lbNext").addEventListener("click", function () { step(1); });
+    lb.addEventListener("click", function (e) { if (e.target === lb || e.target.classList.contains("lb-stage")) closeLb(); });
+    document.addEventListener("keydown", function (e) {
+        if (!lb.classList.contains("open")) return;
+        if (e.key === "Escape") closeLb();
+        else if (e.key === "ArrowLeft") step(-1);
+        else if (e.key === "ArrowRight") step(1);
+    });
 </script>
 
 </body>
