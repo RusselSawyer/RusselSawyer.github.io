@@ -117,30 +117,27 @@
         .filters button:hover { color: var(--ink); border-color: var(--muted); }
         .filters button.on { background: var(--ink); color: #111; border-color: var(--ink); }
         .gallery { column-count: 3; column-gap: 16px; }
-        .shot { position: relative; display: block; width: 100%; margin: 0 0 16px; break-inside: avoid; border: 0; padding: 0; cursor: pointer; overflow: hidden; background: var(--panel2); aspect-ratio: var(--ar); text-align: left; color: inherit; }
+        .shot { position: relative; display: block; width: 100%; margin: 0 0 16px; break-inside: avoid; border: 0; padding: 0; cursor: zoom-in; overflow: hidden; background: var(--panel2); aspect-ratio: var(--ar); text-align: left; color: inherit; }
         .shot .ph { position: absolute; inset: 0; background: var(--g); display: grid; place-items: center; }
         .shot .ph svg { width: 34px; height: 34px; stroke: rgba(255,255,255,.55); fill: none; stroke-width: 1.5; }
-        .shot img, .shot video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
-        .shot:hover img, .shot:hover video, .shot:hover .ph { transform: scale(1.06); }
+        .shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
+        .shot:hover img, .shot:hover .ph { transform: scale(1.06); }
         .shot .ph { transition: transform .6s; }
-        .shot .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 16px 14px; background: linear-gradient(transparent, rgba(0,0,0,.78)); opacity: 0; transform: translateY(8px); transition: .3s; z-index: 2; }
+        .shot .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 16px 14px; background: linear-gradient(transparent, rgba(0,0,0,.78)); opacity: 0; transform: translateY(8px); transition: .3s; }
         .shot:hover .cap, .shot:focus-visible .cap { opacity: 1; transform: none; }
         .cap b { display: block; font-family: var(--serif); font-size: 1.05rem; }
         .cap span { font-family: var(--mono); font-size: .7rem; color: var(--accent); letter-spacing: .08em; }
         .shot.hide { display: none; }
 
-        /* Video Badge indicator on thumbnail */
-        .video-badge { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: 1px solid var(--accent); color: var(--accent); padding: 3px 8px; font-family: var(--mono); font-size: 0.65rem; border-radius: 4px; z-index: 2; letter-spacing: .08em; text-transform: uppercase; }
-
         /* Lightbox */
         #lb { position: fixed; inset: 0; z-index: 90; background: rgba(4, 4, 5, .96); display: none; grid-template-rows: 1fr auto; padding: 20px; }
         #lb.open { display: grid; animation: fade .25s ease; }
         .lb-stage { position: relative; display: grid; place-items: center; min-height: 0; }
-        .lb-img { max-width: 100%; max-height: 100%; display: grid; place-items: center; width: 100%; height: 100%; }
-        .lb-img img, .lb-img video { max-width: 100%; max-height: calc(100vh - 150px); object-fit: contain; display: block; }
+        .lb-img { max-width: 100%; max-height: 100%; display: grid; place-items: center; }
+        .lb-img img { max-width: 100%; max-height: calc(100vh - 150px); object-fit: contain; display: block; }
         .lb-img .ph { width: min(80vw, 760px); aspect-ratio: var(--ar); max-height: calc(100vh - 150px); background: var(--g); display: grid; place-items: center; }
         .lb-img .ph svg { width: 48px; height: 48px; stroke: rgba(255,255,255,.6); fill: none; stroke-width: 1.4; }
-        .lb-btn { position: absolute; background: rgba(255,255,255,.08); border: 1px solid var(--line); color: var(--ink); width: 46px; height: 46px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; display: grid; place-items: center; z-index: 5; }
+        .lb-btn { position: absolute; background: rgba(255,255,255,.08); border: 1px solid var(--line); color: var(--ink); width: 46px; height: 46px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; display: grid; place-items: center; }
         .lb-btn:hover { background: var(--accent); color: #111; }
         .lb-prev { left: 4px; } .lb-next { right: 4px; } .lb-close { top: 0; right: 0; }
         .lb-info { text-align: center; padding-top: 14px; }
@@ -206,7 +203,7 @@
             html { scroll-behavior: auto; }
             .grain, .focus, .rec b, .cursor { animation: none; }
             .rv { opacity: 1; transform: none; transition: none; }
-            .btn, .cert, .frame, .shot img, .shot video, .shot .ph, #boot, .blade { transition: none; }
+            .btn, .cert, .frame, .shot img, .shot .ph, #boot, .blade { transition: none; }
             body:not(.locked) .page { animation: none; }
         }
     </style>
@@ -252,7 +249,7 @@
         <section class="hero" id="home">
             <div class="wrap">
                 <div>
-                    <p class="eyebrow">Photographer & Performer</p>
+                    <p class="eyebrow">Photographer</p>
                     <h1>Hi, I'm <em>Russel Heinrich</em> Sawyer</h1>
                     <div class="typing" aria-live="off"><b>&#9679;</b><span id="typed"></span><span class="cursor" aria-hidden="true"></span></div>
                     <p class="tagline">But you can call me Sevi! I'm easy to get along with and someone you can often lean on.</p>
@@ -295,7 +292,7 @@
                         </div>
                         <figcaption></figcaption>
                         <span class="tag t1" aria-hidden="true">PORTRAIT</span>
-                        <span class="tag t2" aria-hidden="true">DANCING</span>
+                        <span class="tag t2" aria-hidden="true">STREET</span>
                         <span class="tag t3" aria-hidden="true">LANDSCAPE</span>
                     </figure>
                 </div>
@@ -306,10 +303,10 @@
             <div class="wrap">
                 <div class="sec-head rv">
                     <span class="num">01</span>
-                    <h2>Selected Work & Videos</h2>
-                    <p>Click any frame or video to view it large. Use the arrow keys to browse.</p>
+                    <h2>Selected Work</h2>
+                    <p>Click any frame to view it large. Use the arrow keys to browse.</p>
                 </div>
-                <div class="filters rv" id="filters" role="group" aria-label="Filter gallery by category"></div>
+                <div class="filters rv" id="filters" role="group" aria-label="Filter photos by category"></div>
                 <div class="gallery" id="grid"></div>
             </div>
         </section>
@@ -329,25 +326,25 @@
                     <div class="card">
                         <h3><span>03</span>Hobbies</h3>
                         <ul class="chips">
-                            <li>Dancing</li>
                             <li>Photography</li>
                             <li>Bonding with Friends</li>
                             <li>Eating</li>
                             <li>Exploring Places</li>
+                            <li>Watching Movies</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="kit rv">
-                    <div class="kit-title">Skills & Passions</div>
+                    <div class="kit-title">Skills in my camera bag</div>
                     <div class="kit-body">
                         <ul class="kit-items">
-                            <li>Dancing & Performance</li>
                             <li>Problem Solving</li>
                             <li>Time Management</li>
                             <li>Quick Learning</li>
                             <li>Strong Communication</li>
                             <li>Team Collaboration</li>
+                            <li>Analytical Thinking</li>
                         </ul>
                     </div>
                 </div>
@@ -411,7 +408,7 @@
             <div class="wrap">
                 <div class="sec-head rv"><span class="num">04</span><h2>Contact</h2></div>
                 <div class="contact-wrap rv">
-                    <p>Have a shoot or dance collaboration in mind? Send me an email or call me and <em>I'll reply as soon as I can.</em></p>
+                    <p>Have a shoot in mind or a question? Send me an email or call me and <em>I'll reply as soon as I can.</em></p>
                     <ul class="contact-list">
                         <li>
                             <span class="contact-label">EMAIL</span>
@@ -430,12 +427,12 @@
     <footer>© 2026 Russel Sawyer // shot &amp; built with HTML, CSS &amp; JS</footer>
 </div>
 
-<div id="lb" role="dialog" aria-modal="true" aria-label="Media viewer">
+<div id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
     <div class="lb-stage">
         <button class="lb-btn lb-close" id="lbClose" aria-label="Close viewer">&times;</button>
-        <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous item">&#8249;</button>
+        <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous photo">&#8249;</button>
         <div class="lb-img" id="lbImg"></div>
-        <button class="lb-btn lb-next" id="lbNext" aria-label="Next item">&#8250;</button>
+        <button class="lb-btn lb-next" id="lbNext" aria-label="Next photo">&#8250;</button>
     </div>
     <div class="lb-info"><h3 id="lbTitle"></h3><p id="lbMeta"></p></div>
 </div>
@@ -443,23 +440,25 @@
 <script>
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    /* ===== ADD YOUR PHOTOS AND DANCING VIDEOS HERE =====
-       type: "image" or "video"
-       For videos, put your video files in a folder (e.g. "videos/dance1.mp4") */
-    var MEDIA_ITEMS = [
-        { type: "image", src: "photos/photo1.jpg", title: "Golden Hour",      cat: "Landscape", meta: "f/8 · 1/250 · ISO 100", ar: 1.5,  g: "linear-gradient(135deg,#f6d365,#fda085)" },
-        { type: "image", src: "photos/photo2.jpg", title: "Quiet Portrait",   cat: "Portrait",  meta: "f/1.8 · 1/400 · ISO 100", ar: 0.8,  g: "linear-gradient(135deg,#a18cd1,#fbc2eb)" },
-        { type: "video", src: "videos/dance1.mp4", title: "Freestyle Dance Cover", cat: "Dancing", meta: "Performance Reel · 60fps", ar: 0.56, g: "linear-gradient(135deg,#ff416c,#ff4b2b)" },
-        { type: "image", src: "photos/photo3.jpg", title: "City Rain",        cat: "Street",    meta: "f/2.8 · 1/125 · ISO 800", ar: 1.0,  g: "linear-gradient(135deg,#434343,#7a8a99)" },
-        { type: "video", src: "videos/dance2.mp4", title: "Choreography Practice", cat: "Dancing", meta: "Studio Session · 1080p", ar: 0.56, g: "linear-gradient(135deg,#8a2387,#e94057)" },
-        { type: "image", src: "photos/photo4.jpg", title: "Rice Terraces",    cat: "Landscape", meta: "f/11 · 1/200 · ISO 100", ar: 1.33, g: "linear-gradient(135deg,#56ab2f,#a8e063)" },
-        { type: "image", src: "photos/photo5.jpg", title: "Friends Night",    cat: "Events",    meta: "f/2 · 1/60 · ISO 1600", ar: 0.75, g: "linear-gradient(135deg,#e5484d,#ff9a8b)" }
+    /* ===== ADD YOUR PHOTOS HERE =====
+       Put your image files in a "photos" folder and list them below.
+       ar = aspect ratio (width / height). Missing files show a colored placeholder. */
+    var PHOTOS = [
+        { src: "photos/photo1.jpg", title: "Golden Hour",      cat: "Landscape", meta: "f/8 · 1/250 · ISO 100", ar: 1.5,  g: "linear-gradient(135deg,#f6d365,#fda085)" },
+        { src: "photos/photo2.jpg", title: "Quiet Portrait",   cat: "Portrait",  meta: "f/1.8 · 1/400 · ISO 100", ar: 0.8,  g: "linear-gradient(135deg,#a18cd1,#fbc2eb)" },
+        { src: "photos/photo3.jpg", title: "City Rain",        cat: "Street",    meta: "f/2.8 · 1/125 · ISO 800", ar: 1.0,  g: "linear-gradient(135deg,#434343,#7a8a99)" },
+        { src: "photos/photo4.jpg", title: "Rice Terraces",    cat: "Landscape", meta: "f/11 · 1/200 · ISO 100", ar: 1.33, g: "linear-gradient(135deg,#56ab2f,#a8e063)" },
+        { src: "photos/photo5.jpg", title: "Friends Night",    cat: "Events",    meta: "f/2 · 1/60 · ISO 1600", ar: 0.75, g: "linear-gradient(135deg,#e5484d,#ff9a8b)" },
+        { src: "photos/photo6.jpg", title: "Market Morning",   cat: "Street",    meta: "f/4 · 1/320 · ISO 200", ar: 1.5,  g: "linear-gradient(135deg,#f7971e,#ffd200)" },
+        { src: "photos/photo7.jpg", title: "Window Light",     cat: "Portrait",  meta: "f/1.4 · 1/500 · ISO 100", ar: 1.0,  g: "linear-gradient(135deg,#2c3e50,#4ca1af)" },
+        { src: "photos/photo8.jpg", title: "Campus Walk",      cat: "Events",    meta: "f/5.6 · 1/250 · ISO 200", ar: 0.8,  g: "linear-gradient(135deg,#355c7d,#c06c84)" },
+        { src: "photos/photo9.jpg", title: "Blue Hour Coast",  cat: "Landscape", meta: "f/9 · 4s · ISO 100", ar: 1.78, g: "linear-gradient(135deg,#0f2027,#2c5364)" }
     ];
     var ICON = '<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3l2-3h8l2 3h3v11H3z"/><circle cx="12" cy="13" r="4"/></svg>';
 
     // Typing headline
     function startTyping() {
-        var roles = ["Dancer", "Photographer", "Storyteller", "Problem Solver", "Gamer", "Friend"];
+        var roles = ["Photographer", "Storyteller", "Problem Solver", "Gamer", "Friend"];
         var el = document.getElementById("typed");
         if (reduce) { el.textContent = roles[0]; return; }
         var r = 0, i = 0, deleting = false;
@@ -477,7 +476,7 @@
     var boot = document.getElementById("boot"), fill = document.getElementById("fill"),
         pctEl = document.getElementById("pct"), stepEl = document.getElementById("step"),
         keyEl = document.getElementById("key"), focusEl = document.getElementById("focus");
-    var steps = ["metering light...", "setting aperture...", "loading gallery & videos...", "ready to shoot"];
+    var steps = ["metering light...", "setting aperture...", "focusing...", "loading gallery...", "ready to shoot"];
     var p = 0, ready = false, entered = false, timer;
 
     function setP(v) {
@@ -535,10 +534,10 @@
         [].forEach.call(rvEls, function (el) { io.observe(el); });
     } else { [].forEach.call(rvEls, function (el) { el.classList.add("in"); }); }
 
-    // Gallery & Video Grid
+    // Gallery
     var grid = document.getElementById("grid"), filtersEl = document.getElementById("filters");
     var cats = ["All"];
-    MEDIA_ITEMS.forEach(function (item) { if (cats.indexOf(item.cat) < 0) cats.push(item.cat); });
+    PHOTOS.forEach(function (ph) { if (cats.indexOf(ph.cat) < 0) cats.push(ph.cat); });
     cats.forEach(function (c, i) {
         var b = document.createElement("button");
         b.type = "button"; b.textContent = c; if (i === 0) b.className = "on";
@@ -550,32 +549,19 @@
         });
         filtersEl.appendChild(b);
     });
-
-    MEDIA_ITEMS.forEach(function (item, i) {
+    PHOTOS.forEach(function (ph, i) {
         var s = document.createElement("button");
-        s.type = "button"; s.className = "shot rv in"; s.dataset.cat = item.cat; s.dataset.i = i;
-        s.style.setProperty("--ar", item.ar); s.style.setProperty("--g", item.g);
-        s.setAttribute("aria-label", "Open " + item.type + ": " + item.title);
-
-        var innerHTML = '<span class="ph">' + ICON + '</span>';
-        if (item.type === "video") {
-            innerHTML += '<video src="' + item.src + '" muted playsinline preload="metadata"></video>';
-            innerHTML += '<span class="video-badge">Video</span>';
-        } else {
-            innerHTML += '<img src="' + item.src + '" alt="' + item.title + '" loading="lazy">';
-        }
-        innerHTML += '<span class="cap"><b>' + item.title + '</b><span>' + item.cat.toUpperCase() + ' &middot; ' + item.meta + '</span></span>';
-        s.innerHTML = innerHTML;
-
-        var mediaElem = s.querySelector("img, video");
-        if (mediaElem) {
-            mediaElem.addEventListener("error", function () { this.style.display = "none"; });
-        }
+        s.type = "button"; s.className = "shot rv in"; s.dataset.cat = ph.cat; s.dataset.i = i;
+        s.style.setProperty("--ar", ph.ar); s.style.setProperty("--g", ph.g);
+        s.setAttribute("aria-label", "Open photo: " + ph.title);
+        s.innerHTML = '<span class="ph">' + ICON + '</span><img src="' + ph.src + '" alt="' + ph.title + '" loading="lazy">' +
+            '<span class="cap"><b>' + ph.title + '</b><span>' + ph.cat.toUpperCase() + ' &middot; ' + ph.meta + '</span></span>';
+        s.querySelector("img").addEventListener("error", function () { this.style.display = "none"; });
         s.addEventListener("click", function () { openLb(i); });
         grid.appendChild(s);
     });
 
-    // Lightbox for Photos & Videos
+    // Lightbox
     var lb = document.getElementById("lb"), lbImg = document.getElementById("lbImg"),
         lbTitle = document.getElementById("lbTitle"), lbMeta = document.getElementById("lbMeta"), cur = 0, lastFocus = null;
     function visibleIdx() {
@@ -584,37 +570,19 @@
         return out;
     }
     function showLb(i) {
-        cur = i; var item = MEDIA_ITEMS[i];
+        cur = i; var ph = PHOTOS[i];
         lbImg.innerHTML = "";
-
-        if (item.type === "video") {
-            var vid = document.createElement("video");
-            vid.src = item.src;
-            vid.controls = true;
-            vid.autoplay = true;
-            vid.playsInline = true;
-            vid.style.maxHeight = "calc(100vh - 150px)";
-            vid.style.maxWidth = "100%";
-            lbImg.appendChild(vid);
-        } else {
-            var box = document.createElement("div");
-            box.className = "ph"; box.style.setProperty("--ar", item.ar); box.style.setProperty("--g", item.g); box.innerHTML = ICON;
-            var im = new Image(); im.alt = item.title;
-            im.onload = function () { lbImg.innerHTML = ""; lbImg.appendChild(im); };
-            im.src = item.src;
-            lbImg.appendChild(box);
-        }
-
-        lbTitle.textContent = item.title;
-        lbMeta.textContent = item.cat.toUpperCase() + "  ·  " + item.meta;
+        var box = document.createElement("div");
+        box.className = "ph"; box.style.setProperty("--ar", ph.ar); box.style.setProperty("--g", ph.g); box.innerHTML = ICON;
+        var im = new Image(); im.alt = ph.title;
+        im.onload = function () { lbImg.innerHTML = ""; lbImg.appendChild(im); };
+        im.src = ph.src;
+        lbImg.appendChild(box);
+        lbTitle.textContent = ph.title;
+        lbMeta.textContent = ph.cat.toUpperCase() + "  ·  " + ph.meta;
     }
     function openLb(i) { lastFocus = document.activeElement; lb.classList.add("open"); document.body.style.overflow = "hidden"; showLb(i); document.getElementById("lbClose").focus(); }
-    function closeLb() {
-        // Pause any playing videos when closing lightbox
-        var playingVid = lbImg.querySelector("video");
-        if (playingVid) playingVid.pause();
-        lb.classList.remove("open"); document.body.style.overflow = ""; if (lastFocus) lastFocus.focus();
-    }
+    function closeLb() { lb.classList.remove("open"); document.body.style.overflow = ""; if (lastFocus) lastFocus.focus(); }
     function step(d) { var v = visibleIdx(), k = v.indexOf(cur); showLb(v[(k + d + v.length) % v.length]); }
     document.getElementById("lbClose").addEventListener("click", closeLb);
     document.getElementById("lbPrev").addEventListener("click", function () { step(-1); });
