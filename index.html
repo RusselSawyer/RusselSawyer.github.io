@@ -112,22 +112,34 @@
         .sec-head p { color: var(--muted); font-size: .95rem; margin-left: auto; max-width: 40ch; }
 
         /* Gallery */
+        :root {
+            --mono: "Courier New";      /* or any font you want */
+            --serif: "Georgia";         /* serif font for captions */
+            --muted: #888;              /* muted text color */
+            --line: #ccc;               /* border line color */
+            --ink: #222;                /* dark ink color */
+            --accent: #e63946;          /* accent highlight */
+            --panel2: #f0f0f0;          /* background panel */
+            --ar: 16 / 9;               /* aspect ratio */
+            --g: #333;                  /* placeholder background */
+        }
+
         .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
-        .filters button { font-family: var(--mono); font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; background: none; color: var(--muted); border: 1px solid var(--line); padding: 8px 16px; cursor: pointer; transition: .15s; }
+        .filters button { font-family: var(--mono), monospace; font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; background: none; color: var(--muted); border: 1px solid var(--line); padding: 8px 16px; cursor: pointer; transition: .15s; }
         .filters button:hover { color: var(--ink); border-color: var(--muted); }
         .filters button.on { background: var(--ink); color: #111; border-color: var(--ink); }
         .gallery { column-count: 3; column-gap: 16px; }
         .shot { position: relative; display: block; width: 100%; margin: 0 0 16px; break-inside: avoid; border: 0; padding: 0; cursor: zoom-in; overflow: hidden; background: var(--panel2); aspect-ratio: var(--ar); text-align: left; color: inherit; }
-        .shot .ph { position: absolute; inset: 0; background: var(--g); display: grid; place-items: center; }
+        .shot .ph { position: absolute; inset: 0; background: var(--g); display: grid; place-items: center; transition: transform .6s; }
         .shot .ph svg { width: 34px; height: 34px; stroke: rgba(255,255,255,.55); fill: none; stroke-width: 1.5; }
         .shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
         .shot:hover img, .shot:hover .ph { transform: scale(1.06); }
-        .shot .ph { transition: transform .6s; }
         .shot .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 16px 14px; background: linear-gradient(transparent, rgba(0,0,0,.78)); opacity: 0; transform: translateY(8px); transition: .3s; }
         .shot:hover .cap, .shot:focus-visible .cap { opacity: 1; transform: none; }
-        .cap b { display: block; font-family: var(--serif); font-size: 1.05rem; }
-        .cap span { font-family: var(--mono); font-size: .7rem; color: var(--accent); letter-spacing: .08em; }
+        .cap b { display: block; font-family: var(--serif), serif; font-size: 1.05rem; }
+        .cap span { font-family: var(--mono), monospace; font-size: .7rem; color: var(--accent); letter-spacing: .08em; }
         .shot.hide { display: none; }
+
 
         /* Lightbox */
         #lb { position: fixed; inset: 0; z-index: 90; background: rgba(4, 4, 5, .96); display: none; grid-template-rows: 1fr auto; padding: 20px; }
