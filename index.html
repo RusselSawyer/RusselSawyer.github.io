@@ -165,6 +165,10 @@
         .cap b{display:block;font-family:var(--serif);font-size:1.05rem}
         .cap span{font-family:var(--mono);font-size:.7rem;color:var(--accent);letter-spacing:.08em}
         .shot.hide{display:none}
+        .play{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:rgba(0,0,0,.55);border:2px solid rgba(255,255,255,.8);pointer-events:none}
+        .play::after{content:"";position:absolute;left:21px;top:15px;border-style:solid;border-width:11px 0 11px 18px;border-color:transparent transparent transparent #fff}
+        .lb-img video{max-width:100%;max-height:calc(100vh - 150px);background:#000;display:block}
+        .lb-img iframe{width:min(90vw,960px);aspect-ratio:16/9;max-height:calc(100vh - 150px);border:0;background:#000;display:block}
         #lb{position:fixed;inset:0;z-index:90;background:rgba(4,4,5,.96);display:none;grid-template-rows:1fr auto;padding:20px}
         #lb.open{display:grid;animation:fade .25s ease}
         .lb-stage{position:relative;display:grid;place-items:center;min-height:0}
@@ -475,14 +479,23 @@
         });
         filtersEl.appendChild(b);
     });
+    function thumbSrc(ph) {
+        if (ph.type === "youtube") return "https://img.youtube.com/vi/" + ph.id + "/hqdefault.jpg";
+        if (ph.type === "video") return ph.poster || "";
+        return ph.src;
+    }
     PHOTOS.forEach(function (ph, i) {
         var s = document.createElement("button");
         s.type = "button"; s.className = "shot rv in"; s.dataset.cat = ph.cat; s.dataset.i = i;
         s.style.setProperty("--ar", ph.ar); s.style.setProperty("--g", ph.g);
         s.setAttribute("aria-label", "Open " + ph.title);
-        s.innerHTML = '<span class="ph">' + iconSvg(ph.cat) + '</span><img src="' + ph.src + '" alt="' + ph.title + '" loading="lazy">' +
+        var t = thumbSrc(ph);
+        s.innerHTML = '<span class="ph">' + iconSvg(ph.cat) + '</span>' +
+            (t ? '<img src="' + t + '" alt="' + ph.title + '" loading="lazy">' : '') +
+            (ph.type ? '<span class="play" aria-hidden="true"></span>' : '') +
             '<span class="cap"><b>' + ph.title + '</b><span>' + ph.cat.toUpperCase() + ' &middot; ' + ph.meta + '</span></span>';
-        s.querySelector("img").addEventListener("error", function () { this.style.display = "none"; });
+        var im = s.querySelector("img");
+        if (im) im.addEventListener("error", function () { this.style.display = "none"; });
         s.addEventListener("click", function () { openLb(i); });
         grid.appendChild(s);
     });
@@ -498,17 +511,29 @@
     function showLb(i) {
         cur = i; var ph = PHOTOS[i];
         lbImg.innerHTML = "";
-        var box = document.createElement("div");
-        box.className = "ph"; box.style.setProperty("--ar", ph.ar); box.style.setProperty("--g", ph.g); box.innerHTML = iconSvg(ph.cat);
-        var im = new Image(); im.alt = ph.title;
-        im.onload = function () { if (cur === i) { lbImg.innerHTML = ""; lbImg.appendChild(im); } };
-        im.src = ph.src;
-        lbImg.appendChild(box);
+        if (ph.type === "video") {
+            var v = document.createElement("video");
+            v.src = ph.src; v.controls = true; v.autoplay = true; v.playsInline = true;
+            if (ph.poster) v.poster = ph.poster;
+            lbImg.appendChild(v);
+        } else if (ph.type === "youtube") {
+            var f = document.createElement("iframe");
+            f.src = "https://www.youtube.com/embed/" + ph.id + "?autoplay=1&rel=0";
+            f.title = ph.title; f.allow = "autoplay; encrypted-media; picture-in-picture"; f.allowFullscreen = true;
+            lbImg.appendChild(f);
+        } else {
+            var box = document.createElement("div");
+            box.className = "ph"; box.style.setProperty("--ar", ph.ar); box.style.setProperty("--g", ph.g); box.innerHTML = iconSvg(ph.cat);
+            var im = new Image(); im.alt = ph.title;
+            im.onload = function () { if (cur === i) { lbImg.innerHTML = ""; lbImg.appendChild(im); } };
+            im.src = ph.src;
+            lbImg.appendChild(box);
+        }
         lbTitle.textContent = ph.title;
         lbMeta.textContent = ph.cat.toUpperCase() + "  ·  " + ph.meta;
     }
     function openLb(i) { lastFocus = document.activeElement; lb.classList.add("open"); document.body.style.overflow = "hidden"; showLb(i); document.getElementById("lbClose").focus(); }
-    function closeLb() { lb.classList.remove("open"); document.body.style.overflow = ""; if (lastFocus) lastFocus.focus(); }
+    function closeLb() { lb.classList.remove("open"); lbImg.innerHTML = ""; document.body.style.overflow = ""; if (lastFocus) lastFocus.focus(); }
     function moveLb(d) { var v = visibleIdx(), k = v.indexOf(cur); showLb(v[(k + d + v.length) % v.length]); }
     document.getElementById("lbClose").addEventListener("click", closeLb);
     document.getElementById("lbPrev").addEventListener("click", function () { moveLb(-1); });
