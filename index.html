@@ -225,33 +225,6 @@
             #boot::after,.bokeh i,.hist i,.bat i:last-child{animation:none}
             #boot.ready .streak,#boot.snap .flash{animation:none}
         }
-
-        /* Admin */
-        footer a{color:inherit;opacity:.7}
-        #admbar{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:95;display:flex;flex-wrap:wrap;gap:8px;padding:8px;background:rgba(17,17,19,.95);border:1px solid var(--accent);box-shadow:0 10px 30px rgba(0,0,0,.5)}
-        #admbar[hidden]{display:none}
-        .ab{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:9px 14px;border:1.5px solid var(--accent);background:var(--accent);color:#111;cursor:pointer}
-        .ab.ghost{background:none;color:var(--accent)}
-        .ab.on{background:var(--ink);border-color:var(--ink)}
-        .ab:disabled{opacity:.5}
-        .ab:focus-visible,dialog input:focus-visible,dialog select:focus-visible,footer a:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
-        body.editing [data-edit]{outline:2px dashed var(--accent);outline-offset:4px;cursor:text;min-height:1em}
-        [data-edit="bio"]{white-space:pre-line}
-        dialog{margin:auto;border:1px solid var(--line);padding:26px;width:min(440px,92vw);max-height:90vh;overflow:auto;background:var(--panel);color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.7)}
-        dialog::backdrop{background:rgba(0,0,0,.75)}
-        dialog h3{font-family:var(--serif);font-size:1.4rem;margin-bottom:6px}
-        dialog p{font-size:.88rem;margin-bottom:10px;color:var(--muted)}
-        dialog label{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:12px 0 6px}
-        dialog input,dialog select{width:100%;font:inherit;font-size:.95rem;padding:10px 12px;border:1px solid var(--line);background:var(--panel2);color:var(--ink)}
-        .row{display:flex;gap:10px;margin-top:18px;justify-content:flex-end;flex-wrap:wrap}
-        .msg{font-size:.82rem;font-weight:700;margin-top:12px;min-height:1.2em}
-        .msg.bad{color:var(--red)}.msg.ok{color:#4ade80}
-        .hash{word-break:break-all;font-family:var(--mono);font-size:.74rem;background:var(--panel2);border:1px solid var(--line);padding:10px;margin-top:10px;user-select:all}
-        #mine{list-style:none;margin-top:14px;display:grid;gap:8px}
-        #mine li{display:flex;align-items:center;gap:10px;font-size:.82rem}
-        #mine img{width:44px;height:44px;object-fit:cover}
-        #mine span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-        #mine button{font:inherit;font-size:.72rem;font-weight:700;padding:5px 10px;border:1px solid var(--red);background:none;color:var(--red);cursor:pointer}
     </style>
 </head>
 <body class="locked">
@@ -297,10 +270,10 @@
         <section class="hero" id="home">
             <div class="wrap">
                 <div>
-                    <p class="eyebrow" data-edit="eyebrow">PROFESSIONAL PHOTOGRAPHER</p>
+                    <p class="eyebrow">PROFESSIONAL PHOTOGRAPHER</p>
                     <h1>Hi, I'm <em>Russel Heinrich</em> Sawyer</h1>
                     <div class="typing" aria-live="off"><b>&#9679;</b><span id="typed"></span><span class="cursor" aria-hidden="true"></span></div>
-                    <p class="tagline" data-edit="tagline">Crafting dreams into reality, one stroke at a time.</p>
+                    <p class="tagline">Crafting dreams into reality, one stroke at a time.</p>
 
                     <div class="follow">
                         <strong>Follow</strong>
@@ -362,7 +335,7 @@
                 <div class="about-grid rv">
                     <div class="card wide">
                         <h3><span>01</span>Bio</h3>
-                        <p data-edit="bio">I’m Russel Heinrich Sawyer, a creative individual with a passion for exploring different forms of art and self-expression.
+                        <p>I’m Russel Heinrich Sawyer, a creative individual with a passion for exploring different forms of art and self-expression.
 
                             Photography is one of the ways I see and interpret the world, but my creativity doesn’t end behind the camera. I’m also drawn to dance, music, painting, makeup, and other forms of visual expression.
 
@@ -374,7 +347,7 @@
                     </div>
                     <div class="card">
                         <h3><span>02</span>Location</h3>
-                        <p data-edit="location">Pasay</p>
+                        <p>Pasay</p>
                     </div>
                     <div class="card">
                         <h3><span>03</span>Hobbies</h3>
@@ -492,17 +465,16 @@
             <div class="wrap">
                 <div class="sec-head rv"><span class="num">04</span><h2>Contact</h2></div>
                 <div class="contact-wrap rv">
-                    <p>Ready to book a shoot or have a quick question? Feel free to message me on instagram or phone, and <em>I'll reply as soon as I can.</em></p>
+                    <p>Ready to book a shoot or have a quick question? Feel free to message me on instagram, and <em>I'll reply as soon as I can.</em></p>
                     <ul class="contact-list">
                         <li><span class="contact-label">INSTAGRAM</span><a href="https://www.instagram.com/russ.heinrich/?__pwa=1">russ.heinrich</a></li>
-                        <li><span class="contact-label">PHONE</span><a href="tel:+639510787205">09510787205 </a></li>
                     </ul>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>© 2026 Russel Heinrich Sawyer // built with HTML, CSS &amp; JS · <a href="#" id="admOpen">Admin</a></footer>
+    <footer>© 2026 Russel Heinrich Sawyer</footer>
 </div>
 
 <div id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
@@ -514,46 +486,6 @@
     </div>
     <div class="lb-info"><h3 id="lbTitle"></h3><p id="lbMeta"></p></div>
 </div>
-
-<!-- Admin bar (only visible after signing in) -->
-<div id="admbar" hidden>
-    <button class="ab" id="editBtn" type="button">Edit text</button>
-    <button class="ab" id="addBtn" type="button">Add pictures</button>
-    <button class="ab ghost" id="pubBtn" type="button">Publish files</button>
-    <button class="ab ghost" id="outBtn" type="button">Sign out</button>
-</div>
-
-<dialog id="dlgLogin" aria-labelledby="lgT">
-    <form id="lgForm" autocomplete="off">
-        <h3 id="lgT">Admin sign in</h3>
-        <p id="lgSub">Only the admin can edit this website.</p>
-        <div id="lgBox">
-            <label for="lgUser">Username</label><input id="lgUser" autocomplete="username">
-            <label for="lgPass">Password</label><input id="lgPass" type="password" autocomplete="current-password">
-        </div>
-        <div id="setBox" hidden>
-            <label for="newPass">New admin password (8+ characters)</label><input id="newPass" type="password" autocomplete="new-password">
-            <div class="hash" id="hashOut" hidden></div>
-        </div>
-        <div class="msg" id="lgMsg" role="alert"></div>
-        <div class="row"><button class="ab ghost" type="button" id="lgCancel">Cancel</button><button class="ab" type="submit" id="lgGo">Sign in</button></div>
-    </form>
-</dialog>
-
-<dialog id="dlgUp" aria-labelledby="upT">
-    <form id="upForm">
-        <h3 id="upT">Add pictures</h3>
-        <p>Pictures are resized automatically. Click Publish files when you are done.</p>
-        <label for="upFile">Pictures</label><input id="upFile" type="file" accept="image/*" multiple>
-        <label for="upName">Name (optional)</label><input id="upName" maxlength="40">
-        <label for="upCat">Category</label>
-        <select id="upCat"><option>Photography</option><option>Singing</option><option>Dancing</option><option>Arts</option></select>
-        <label for="upDate">Date (optional)</label><input id="upDate" maxlength="20" placeholder="e.g. August 2026">
-        <div class="msg" id="upMsg" role="status"></div>
-        <ul id="mine"></ul>
-        <div class="row"><button class="ab ghost" type="button" id="upCancel">Close</button><button class="ab" type="submit" id="upGo">Upload</button></div>
-    </form>
-</dialog>
 
 <script>
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -800,258 +732,6 @@
         else if (e.key === "ArrowLeft") moveLb(-1);
         else if (e.key === "ArrowRight") moveLb(1);
     });
-</script>
-
-<script>
-    /* ===== Admin: sign in, edit text, add pictures, publish files =====
-       SETUP (one time, you the coder):
-       1. Open the page, scroll to the footer and click "Admin".
-       2. Type the password you want, click "Create code", and copy the long code.
-       3. Paste that code between the quotes of ADMIN_HASH below, save, and push.
-       Edits are saved in the admin's own browser until you publish the files he sends you. */
-    (function () {
-        var ADMIN_USER = "admin";
-        var ADMIN_HASH = "e009e4c5c588629b9c948ac4aa22308a777171e8edcfb264e2a9ed4b3b0d4b67";
-        var SALT = "portfolio-admin-v1:";
-        var CATS = ["Photography", "Singing", "Dancing", "Arts"], LS = "site-edits-v1", GRAD = "linear-gradient(135deg,#355c7d,#c06c84)";
-        var $ = function (id) { return document.getElementById(id); };
-        var gridEl = $("grid"), fileEdits = { text: {}, photos: [] }, local = { text: {} };
-        var rows = [], urls = [], cards = [], orig = {}, base = {}, tries = 0, lockUntil = 0;
-        try { local = JSON.parse(localStorage.getItem(LS)) || local; } catch (e) {}
-        if (!local.text) local.text = {};
-        var norm = function (s) { return String(s).replace(/\s+/g, " ").trim(); };
-        var fname = function (x) { return "up-" + (x.uid || x.id) + ".jpg"; };
-        var published = function (x) { return fileEdits.photos.some(function (p) { return p.src === "photos/" + fname(x); }); };
-
-        /* ---------- Storage for added pictures (IndexedDB) ---------- */
-        function db() {
-            return new Promise(function (ok, no) {
-                var q = indexedDB.open("portfolio-admin", 1);
-                q.onupgradeneeded = function () { q.result.createObjectStore("photos", { keyPath: "id", autoIncrement: true }); };
-                q.onsuccess = function () { ok(q.result); };
-                q.onerror = function () { no(q.error); };
-            });
-        }
-        function run(mode, fn) {
-            return db().then(function (d) {
-                return new Promise(function (ok, no) {
-                    var t = d.transaction("photos", mode), r = fn(t.objectStore("photos"));
-                    t.oncomplete = function () { ok(r && r.result); };
-                    t.onerror = t.onabort = function () { no(t.error); };
-                });
-            });
-        }
-        var listAll = function () { return run("readonly", function (s) { return s.getAll(); }); };
-        var addOne = function (rec) { return run("readwrite", function (s) { return s.add(rec); }); };
-        var delOne = function (id) { return run("readwrite", function (s) { return s["delete"](id); }); };
-
-        /* ---------- Gallery cards ---------- */
-        function clean(p) {
-            if (!p || typeof p.src !== "string" || p.src.indexOf("photos/") !== 0 || p.src.indexOf("..") > -1) return null;
-            return { src: p.src, title: String(p.title || "Photo").slice(0, 60), cat: CATS.indexOf(p.cat) > -1 ? p.cat : "Photography",
-                meta: String(p.meta || "").slice(0, 30), ar: Math.max(0.5, Math.min(2, +p.ar || 1)), g: GRAD };
-        }
-        function addCard(ph) {
-            var i = PHOTOS.push(ph) - 1, s = document.createElement("button");
-            s.type = "button"; s.className = "shot rv in"; s.dataset.cat = ph.cat; s.dataset.i = i;
-            s.style.setProperty("--ar", ph.ar); s.style.setProperty("--g", ph.g);
-            s.setAttribute("aria-label", "Open " + ph.title);
-            s.innerHTML = '<span class="ph">' + iconSvg(ph.cat) + '</span><img loading="lazy" alt=""><span class="cap"><b></b><span></span></span>';
-            var im = s.querySelector("img");
-            im.src = ph.src; im.alt = ph.title;
-            im.addEventListener("error", function () { this.style.display = "none"; });
-            s.querySelector("b").textContent = ph.title;
-            s.querySelector(".cap span").textContent = ph.cat.toUpperCase() + " \u00b7 " + ph.meta;
-            s.addEventListener("click", function () { openLb(i); });
-            gridEl.insertBefore(s, gridEl.firstChild);
-            return s;
-        }
-        function renderLocal() {
-            cards.forEach(function (c) { c.remove(); });
-            urls.forEach(function (u) { URL.revokeObjectURL(u); });
-            cards = []; urls = [];
-            return listAll().then(function (r) {
-                rows = r.sort(function (a, b) { return a.id - b.id; });
-                var ul = $("mine"); ul.innerHTML = "";
-                rows.forEach(function (x) {
-                    var u = URL.createObjectURL(x.blob); urls.push(u);
-                    if (!published(x)) cards.push(addCard({ src: u, title: x.title || "New picture", cat: x.cat, meta: x.date || "", ar: x.ar, g: GRAD }));
-                    var li = document.createElement("li"), im = document.createElement("img"), sp = document.createElement("span"), bt = document.createElement("button");
-                    im.alt = ""; im.src = u;
-                    sp.textContent = (x.title || "New picture") + (published(x) ? " (published)" : " (not published yet)");
-                    bt.type = "button"; bt.textContent = "Remove";
-                    bt.onclick = function () { if (confirm("Remove this picture from this browser?")) delOne(x.id).then(renderLocal); };
-                    li.appendChild(im); li.appendChild(sp); li.appendChild(bt); ul.appendChild(li);
-                });
-            });
-        }
-
-        /* ---------- Text edits ---------- */
-        function applyText() {
-            [].forEach.call(document.querySelectorAll("[data-edit]"), function (el) {
-                var k = el.dataset.edit, v = local.text[k] != null ? local.text[k] : fileEdits.text[k];
-                if (v != null) el.textContent = v;
-            });
-        }
-        function saveText() {
-            [].forEach.call(document.querySelectorAll("[data-edit]"), function (el) {
-                var k = el.dataset.edit, t = el.innerText.trim();
-                if (norm(t) === norm(base[k])) delete local.text[k]; else local.text[k] = t;
-            });
-            try { localStorage.setItem(LS, JSON.stringify(local)); } catch (e) {}
-        }
-        function setEditing(on) {
-            document.body.classList.toggle("editing", on);
-            $("editBtn").classList.toggle("on", on);
-            $("editBtn").textContent = on ? "Done editing" : "Edit text";
-            [].forEach.call(document.querySelectorAll("[data-edit]"), function (el) {
-                if (on) { el.setAttribute("contenteditable", "true"); el.setAttribute("role", "textbox"); }
-                else { el.removeAttribute("contenteditable"); el.removeAttribute("role"); }
-            });
-            if (!on) saveText();
-        }
-        document.addEventListener("keydown", function (e) {
-            if (e.key === "Enter" && e.target.dataset && e.target.dataset.edit && e.target.dataset.edit !== "bio") e.preventDefault();
-        });
-        document.addEventListener("paste", function (e) {
-            if (e.target.dataset && e.target.dataset.edit) {
-                e.preventDefault();
-                document.execCommand("insertText", false, (e.clipboardData || window.clipboardData).getData("text"));
-            }
-        });
-
-        /* ---------- Password check (hash only, never the plain password) ---------- */
-        function sha(txt) {
-            if (!window.crypto || !crypto.subtle) return Promise.reject(new Error("no-crypto"));
-            return crypto.subtle.digest("SHA-256", new TextEncoder().encode(SALT + txt)).then(function (b) {
-                return Array.prototype.map.call(new Uint8Array(b), function (x) { return ("0" + x.toString(16)).slice(-2); }).join("");
-            });
-        }
-        function setAdmin(on) {
-            document.body.classList.toggle("admin", on);
-            $("admbar").hidden = !on;
-            if (!on) setEditing(false);
-            try { if (on) sessionStorage.setItem("adm", "1"); else sessionStorage.removeItem("adm"); } catch (e) {}
-        }
-        function openDlg(d) { if (d.showModal) d.showModal(); else d.setAttribute("open", ""); }
-        function closeDlg(d) { if (d.close) d.close(); else d.removeAttribute("open"); }
-        function say(el, text, kind) { el.textContent = text; el.className = "msg" + (kind ? " " + kind : ""); }
-
-        var setup = !ADMIN_HASH;
-        function openLogin() {
-            $("lgForm").reset(); say($("lgMsg"), ""); $("hashOut").hidden = true;
-            $("lgBox").hidden = setup; $("setBox").hidden = !setup;
-            $("lgT").textContent = setup ? "Set up the admin password" : "Admin sign in";
-            $("lgSub").textContent = setup ? "No password is set yet. Type the one you want and I will make a code for your file." : "Only the admin can edit this website.";
-            $("lgGo").textContent = setup ? "Create code" : "Sign in";
-            openDlg($("dlgLogin"));
-            (setup ? $("newPass") : $("lgUser")).focus();
-        }
-        $("lgForm").addEventListener("submit", function (e) {
-            e.preventDefault();
-            var m = $("lgMsg");
-            if (setup) {
-                var np = $("newPass").value;
-                if (np.length < 8) { say(m, "Use at least 8 characters.", "bad"); return; }
-                sha(np).then(function (h) {
-                    $("hashOut").textContent = h; $("hashOut").hidden = false;
-                    say(m, 'Copy this code into ADMIN_HASH (between the quotes) in index.html, save, and push. The username is "' + ADMIN_USER + '".', "ok");
-                }, function () { say(m, "This browser cannot make the code. Open the page on https or localhost.", "bad"); });
-                return;
-            }
-            if (Date.now() < lockUntil) { say(m, "Too many tries. Please wait a little.", "bad"); return; }
-            sha($("lgPass").value).then(function (h) {
-                if ($("lgUser").value.trim() === ADMIN_USER && h === ADMIN_HASH) {
-                    tries = 0; closeDlg($("dlgLogin")); setAdmin(true);
-                } else {
-                    tries++;
-                    if (tries >= 5) { lockUntil = Date.now() + 30000; tries = 0; say(m, "Too many tries. Wait 30 seconds.", "bad"); }
-                    else say(m, "Wrong username or password.", "bad");
-                }
-            }, function () { say(m, "This browser cannot check the password. Open the page on https.", "bad"); });
-        });
-        $("lgCancel").addEventListener("click", function () { closeDlg($("dlgLogin")); });
-
-        /* ---------- Add pictures (admin only) ---------- */
-        function shrink(file) {
-            return new Promise(function (ok, no) {
-                var img = new Image(), u = URL.createObjectURL(file);
-                img.onload = function () {
-                    var s = Math.min(1, 1600 / Math.max(img.naturalWidth, img.naturalHeight)),
-                        w = Math.round(img.naturalWidth * s), h = Math.round(img.naturalHeight * s), c = document.createElement("canvas");
-                    c.width = w; c.height = h;
-                    c.getContext("2d").drawImage(img, 0, 0, w, h);
-                    URL.revokeObjectURL(u);
-                    c.toBlob(function (bl) { if (bl) ok({ blob: bl, ar: Math.max(0.5, Math.min(2, w / h)) }); else no(new Error("fail")); }, "image/jpeg", 0.85);
-                };
-                img.onerror = function () { URL.revokeObjectURL(u); no(new Error("bad")); };
-                img.src = u;
-            });
-        }
-        $("upForm").addEventListener("submit", function (e) {
-            e.preventDefault();
-            if (!document.body.classList.contains("admin")) return;
-            var files = [].slice.call($("upFile").files), m = $("upMsg"), n = 0;
-            if (!files.length) { say(m, "Please choose a picture first.", "bad"); return; }
-            var title = $("upName").value.trim(), cat = $("upCat").value,
-                date = $("upDate").value.trim() || new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" });
-            $("upGo").disabled = true; say(m, "Uploading\u2026");
-            files.reduce(function (chain, f) {
-                return chain.then(function () {
-                    return shrink(f).then(function (r) {
-                        return addOne({ blob: r.blob, ar: r.ar, title: title, cat: cat, date: date, uid: Date.now().toString(36) + Math.random().toString(36).slice(2, 6) });
-                    }).then(function () { n++; });
-                });
-            }, Promise.resolve()).then(renderLocal).then(function () {
-                say(m, n + (n === 1 ? " picture added." : " pictures added."), "ok"); $("upForm").reset();
-            }).catch(function () {
-                say(m, "Could not add a picture. Use JPG or PNG and allow the browser to store data.", "bad");
-            }).then(function () { $("upGo").disabled = false; });
-        });
-        $("upCancel").addEventListener("click", function () { closeDlg($("dlgUp")); });
-
-        /* ---------- Publish files (send these to the developer) ---------- */
-        function download(name, blob) {
-            var a = document.createElement("a");
-            a.href = URL.createObjectURL(blob); a.download = name;
-            document.body.appendChild(a); a.click(); a.remove();
-            setTimeout(function () { URL.revokeObjectURL(a.href); }, 5000);
-        }
-        $("pubBtn").addEventListener("click", function () {
-            setEditing(false);
-            var text = {}, k, photos = fileEdits.photos.slice(), files = [];
-            for (k in fileEdits.text) text[k] = fileEdits.text[k];
-            for (k in local.text) text[k] = local.text[k];
-            rows.forEach(function (x) {
-                if (published(x)) return;
-                photos.push({ src: "photos/" + fname(x), title: x.title || "New picture", cat: x.cat, meta: x.date || "", ar: +x.ar.toFixed(3) });
-                files.push([fname(x), x.blob]);
-            });
-            download("site-edits.json", new Blob([JSON.stringify({ text: text, photos: photos }, null, 2)], { type: "application/json" }));
-            files.forEach(function (f, i) { setTimeout(function () { download(f[0], f[1]); }, 500 * (i + 1)); });
-            alert("Downloaded site-edits.json and " + files.length + " picture file(s).\nSend them to your developer so the changes go live.\n(If your browser asks, allow multiple downloads.)");
-        });
-
-        /* ---------- Buttons ---------- */
-        $("admOpen").addEventListener("click", function (e) { e.preventDefault(); if (document.body.classList.contains("admin")) $("addBtn").click(); else openLogin(); });
-        $("editBtn").addEventListener("click", function () { setEditing(!document.body.classList.contains("editing")); });
-        $("addBtn").addEventListener("click", function () { say($("upMsg"), ""); openDlg($("dlgUp")); });
-        $("outBtn").addEventListener("click", function () { setAdmin(false); closeDlg($("dlgUp")); });
-
-        /* ---------- Start ---------- */
-        [].forEach.call(document.querySelectorAll("[data-edit]"), function (el) { orig[el.dataset.edit] = el.textContent; base[el.dataset.edit] = orig[el.dataset.edit]; });
-        try { if (sessionStorage.getItem("adm") === "1") setAdmin(true); } catch (e) {}
-        fetch("site-edits.json", { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
-            if (j) {
-                fileEdits.text = j.text || {}; fileEdits.photos = Array.isArray(j.photos) ? j.photos : [];
-                for (var k in fileEdits.text) base[k] = fileEdits.text[k];
-            }
-        }, function () {}).then(function () {
-            applyText();
-            fileEdits.photos.map(clean).filter(Boolean).forEach(addCard);
-            return renderLocal();
-        }).catch(function () {});
-    })();
 </script>
 </body>
 </html>
